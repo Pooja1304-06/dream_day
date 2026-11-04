@@ -17,6 +17,10 @@ import adminRoutes from "./routes/admin.js";
 
 const app = express();
 
+app.get("/", (req, res) => {
+  res.send("Welcome to Dream Day API. Server is running successfully!");
+});
+
 // =====================================================
 // CORS
 // =====================================================
