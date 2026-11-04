@@ -1,0 +1,145 @@
+.login-selection-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  background: linear-gradient(135deg, #faf7ff, #eee5ff);
+  font-family: "Poppins", sans-serif;
+}
+
+.selection-container {
+  width: 100%;
+  max-width: 950px;
+  text-align: center;
+}
+
+.selection-brand {
+  margin-bottom: 35px;
+}
+
+.selection-logo {
+  width: 65px;
+  height: 65px;
+  margin: auto;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+}
+
+.selection-brand h1 {
+  color: #5b21b6;
+  font-size: 32px;
+  margin: 12px 0 4px;
+}
+
+.selection-brand p {
+  color: #a78bfa;
+  font-size: 13px;
+}
+
+.selection-heading h2 {
+  color: #32174d;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.selection-heading p {
+  color: #888;
+  font-size: 14px;
+}
+
+.login-choice-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.login-choice-card {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 22px;
+  box-shadow: 0 15px 45px rgba(91, 33, 182, 0.08);
+  transition: 0.3s;
+}
+
+.login-choice-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(91, 33, 182, 0.15);
+}
+
+.choice-icon {
+  width: 75px;
+  height: 75px;
+  margin: auto auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 22px;
+}
+
+.user-choice-icon {
+  background: #f3e8ff;
+  color: #9333ea;
+}
+
+.admin-choice-icon {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+.login-choice-card h3 {
+  font-size: 21px;
+  color: #32174d;
+  margin-bottom: 12px;
+}
+
+.login-choice-card p {
+  color: #888;
+  font-size: 13px;
+  line-height: 1.8;
+  min-height: 50px;
+}
+
+.login-choice-card button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #7c3aed, #9333ea);
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transition: 0.3s;
+}
+
+.login-choice-card button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.25);
+}
+
+.selection-footer {
+  margin-top: 45px;
+  font-size: 12px;
+  color: #aaa;
+}
+
+@media(max-width: 650px) {
+  .login-choice-container {
+    grid-template-columns: 1fr;
+  }
+
+  .selection-heading h2 {
+    font-size: 23px;
+  }
+}

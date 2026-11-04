@@ -1,0 +1,796 @@
+
+/* =========================================
+   DREAM DAY - AI EVENT PLANNER
+   Clean, responsive, single-column layout
+========================================= */
+
+.ai-planner-page {
+  min-height: 100vh;
+  padding: 48px 24px 70px;
+  background: linear-gradient(
+    135deg,
+    #f8f7ff 0%,
+    #ffffff 48%,
+    #f5f3ff 100%
+  );
+  color: #19172c;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.ai-planner-page *,
+.ai-planner-page *::before,
+.ai-planner-page *::after {
+  box-sizing: border-box;
+}
+
+.ai-planner-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* =========================================
+   PAGE HEADER
+========================================= */
+
+.ai-planner-heading {
+  margin-bottom: 32px;
+}
+
+.ai-planner-label {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: #635bff;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.ai-planner-heading h1 {
+  margin: 8px 0 14px;
+  color: #19172c;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -1.2px;
+}
+
+.ai-planner-heading p {
+  max-width: 760px;
+  margin: 0;
+  color: #6b6880;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+/* =========================================
+   MAIN LAYOUT
+   Form first, results below
+========================================= */
+
+.ai-planner-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 26px;
+  width: 100%;
+  align-items: start;
+}
+
+/* =========================================
+   FORM AND RESULTS CARDS
+========================================= */
+
+.ai-planner-card {
+  width: 100%;
+  min-width: 0;
+  padding: 32px;
+  border: 1px solid #e9e5ff;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 10px 35px rgba(45, 35, 100, 0.06);
+}
+
+.ai-planner-card h2 {
+  margin: 0 0 26px;
+  color: #211d3b;
+  font-size: 25px;
+  font-weight: 750;
+  line-height: 1.4;
+}
+
+.ai-planner-results {
+  margin-top: 28px;
+  scroll-margin-top: 24px;
+  animation: aiPlannerAppear 0.35s ease-out;
+}
+
+/* =========================================
+   FORM
+========================================= */
+
+.ai-planner-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: 100%;
+}
+
+/* Each field */
+
+.ai-planner-field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  width: 100%;
+  min-width: 0;
+}
+
+.ai-planner-field label {
+  color: #36334b;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.ai-planner-field input,
+.ai-planner-field select,
+.ai-planner-field textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  padding: 13px 15px;
+  border: 1px solid #dedbea;
+  border-radius: 12px;
+  outline: none;
+  background: #ffffff;
+  color: #25213b;
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.5;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.ai-planner-field input::placeholder,
+.ai-planner-field textarea::placeholder {
+  color: #a19caf;
+}
+
+.ai-planner-field input:hover,
+.ai-planner-field select:hover,
+.ai-planner-field textarea:hover {
+  border-color: #c5bdf5;
+}
+
+.ai-planner-field input:focus,
+.ai-planner-field select:focus,
+.ai-planner-field textarea:focus {
+  border-color: #635bff;
+  box-shadow: 0 0 0 4px rgba(99, 91, 255, 0.1);
+}
+
+.ai-planner-field textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+/* Use this class if you want to arrange form fields in rows.
+   Example: <div className="ai-planner-form-row">...</div> */
+
+.ai-planner-form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  width: 100%;
+}
+
+/* =========================================
+   GENERATE PLAN BUTTON
+========================================= */
+
+.ai-planner-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 54px;
+  margin-top: 4px;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #7163ff, #5142e8);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 750;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(99, 91, 255, 0.2);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.ai-planner-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(99, 91, 255, 0.28);
+}
+
+.ai-planner-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.ai-planner-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.ai-planner-empty {
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+  border: 1px dashed #dcd5ff;
+  border-radius: 16px;
+  background: #fcfbff;
+  text-align: center;
+}
+
+.ai-planner-empty-icon {
+  display: grid;
+  place-items: center;
+  width: 68px;
+  height: 68px;
+  margin-bottom: 18px;
+  border-radius: 20px;
+  background: #f0edff;
+  font-size: 32px;
+}
+
+.ai-planner-empty h2 {
+  margin: 0 0 10px;
+  color: #292442;
+  font-size: 21px;
+}
+
+.ai-planner-empty p {
+  max-width: 400px;
+  margin: 0;
+  color: #77738a;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* =========================================
+   BUDGET SUMMARY
+========================================= */
+
+.ai-planner-summary {
+  margin: 22px 0;
+  padding: 24px;
+  border: 1px solid #e5e0ff;
+  border-radius: 17px;
+  background: linear-gradient(135deg, #f5f2ff, #fbfaff);
+}
+
+.ai-planner-summary-label {
+  color: #716b8b;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ai-planner-summary-amount {
+  margin: 10px 0 16px;
+  color: #5b4be8;
+  font-size: clamp(26px, 4vw, 34px);
+  font-weight: 800;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.ai-planner-summary p {
+  margin: 8px 0;
+  color: #57536b;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* =========================================
+   RESULT HEADINGS
+========================================= */
+
+.ai-planner-result-heading {
+  margin-bottom: 24px;
+}
+
+.ai-planner-result-heading h2 {
+  margin: 10px 0;
+  color: #211d3b;
+  font-size: clamp(23px, 3vw, 30px);
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.ai-planner-result-heading > p:last-child {
+  margin: 0;
+  color: #77738a;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.ai-planner-section-title {
+  margin: 28px 0 15px !important;
+  color: #282341;
+  font-size: 19px !important;
+  font-weight: 750;
+  line-height: 1.5;
+}
+
+/* =========================================
+   BUDGET BREAKDOWN
+========================================= */
+
+.ai-planner-budget-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 15px 0;
+  border-bottom: 1px solid #f0eef6;
+  color: #57536b;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.ai-planner-budget-row:last-child {
+  border-bottom: none;
+}
+
+.ai-planner-budget-row span:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.ai-planner-budget-row span:last-child {
+  flex-shrink: 0;
+  color: #292442;
+  font-weight: 750;
+  text-align: right;
+}
+
+/* =========================================
+   GENERATED TEXT
+========================================= */
+
+.ai-planner-result {
+  margin-top: 18px;
+  color: #49455e;
+  font-size: 15px;
+  line-height: 1.9;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.ai-planner-result p {
+  margin: 0 0 14px;
+}
+
+/* =========================================
+   PREPARATION CHECKLIST
+========================================= */
+
+.ai-planner-tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ai-planner-task {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 0;
+  padding: 14px;
+  border: 1px solid #eeebf7;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #49455e;
+  font-size: 14px;
+  line-height: 1.7;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.ai-planner-task:hover {
+  border-color: #ded7ff;
+  background: #fcfbff;
+}
+
+.ai-planner-task-checkbox {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 3px;
+  accent-color: #635bff;
+  cursor: pointer;
+}
+
+.ai-planner-task-number {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #eeebff;
+  color: #5948e8;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.ai-planner-task-checkbox:checked + .ai-planner-task-number {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.ai-planner-task-checkbox:checked ~ span:last-child {
+  color: #8b8799;
+  text-decoration: line-through;
+}
+
+
+/* =========================================
+   ERROR AND INFORMATION MESSAGES
+========================================= */
+
+.ai-planner-error {
+  margin: 16px 0;
+  padding: 14px 16px;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.ai-planner-note {
+  margin-top: 24px;
+  padding: 16px;
+  border: 1px solid #fde7a8;
+  border-radius: 12px;
+  background: #fffbeb;
+  color: #92400e;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* =========================================
+   RESET AND NEW PLAN BUTTONS
+========================================= */
+
+.ai-planner-reset-button {
+  width: 100%;
+  min-height: 46px;
+  padding: 12px 16px;
+  border: 1px solid #e3def8;
+  border-radius: 11px;
+  background: #ffffff;
+  color: #6254db;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.ai-planner-reset-button:hover {
+  border-color: #cfc5ff;
+  background: #f7f5ff;
+}
+
+.ai-planner-new-plan {
+  margin-top: 24px;
+}
+
+/* =========================================
+   FEATURE LIST
+========================================= */
+
+.ai-planner-feature-list {
+  margin-top: 22px;
+  text-align: left;
+}
+
+.ai-planner-feature-list p {
+  margin: 12px 0;
+  color: #625d78;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* =========================================
+   ANIMATION
+========================================= */
+
+@keyframes aiPlannerAppear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 850px) {
+  .ai-planner-page {
+    padding: 36px 18px 50px;
+  }
+
+  .ai-planner-card {
+    padding: 25px;
+    border-radius: 19px;
+  }
+
+  .ai-planner-form-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .ai-planner-heading {
+    margin-bottom: 26px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+  .ai-planner-page {
+    padding: 28px 13px 40px;
+  }
+
+  .ai-planner-heading h1 {
+    font-size: 31px;
+    letter-spacing: -0.6px;
+  }
+
+  .ai-planner-heading p {
+    font-size: 15px;
+  }
+
+  .ai-planner-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .ai-planner-card {
+    padding: 19px;
+    border-radius: 16px;
+  }
+
+  .ai-planner-card h2 {
+    font-size: 21px;
+  }
+
+  .ai-planner-form {
+    gap: 19px;
+  }
+
+  .ai-planner-field input,
+  .ai-planner-field select,
+  .ai-planner-field textarea {
+    font-size: 14px;
+  }
+
+  .ai-planner-summary {
+    padding: 18px;
+  }
+
+  .ai-planner-budget-row {
+    gap: 12px;
+    font-size: 13px;
+  }
+
+  .ai-planner-task {
+    padding: 12px;
+    gap: 9px;
+  }
+
+  .ai-planner-result {
+    font-size: 14px;
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .ai-planner-results,
+  .ai-planner-button,
+  .ai-planner-field input,
+  .ai-planner-field select,
+  .ai-planner-field textarea {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* =====================================
+   DREAM DAY - PREMIUM ANIMATIONS
+===================================== */
+
+/* Page entrance */
+.ai-planner-container {
+  animation: dreamDayFadeIn 0.7s ease-out both;
+}
+
+@keyframes dreamDayFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Heading animation */
+.ai-planner-heading {
+  animation: dreamDaySlideUp 0.8s ease-out both;
+}
+
+@keyframes dreamDaySlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Form card hover effect */
+.ai-planner-card {
+  transition:
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.ai-planner-card:hover {
+  border-color: #dcd4ff;
+  box-shadow: 0 16px 42px rgba(75, 55, 160, 0.09);
+}
+
+/* Generate button animation */
+.ai-planner-button {
+  background-size: 200% 200%;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background-position 0.4s ease;
+}
+
+.ai-planner-button:hover:not(:disabled) {
+  transform: translateY(-3px);
+  background-position: 100% 0;
+  box-shadow: 0 12px 25px rgba(99, 91, 255, 0.3);
+}
+
+.ai-planner-button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* Generated results entrance */
+.ai-planner-results {
+  animation: dreamDayResults 0.65s ease-out both;
+}
+
+@keyframes dreamDayResults {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Budget rows */
+.ai-planner-budget-row {
+  transition:
+    background 0.25s ease,
+    padding-left 0.25s ease,
+    color 0.25s ease;
+}
+
+.ai-planner-budget-row:hover {
+  padding-left: 10px;
+  background: #faf8ff;
+}
+
+/* Checklist hover */
+.ai-planner-task {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.ai-planner-task:hover {
+  transform: translateX(4px);
+  border-color: #dcd4ff;
+  box-shadow: 0 5px 14px rgba(75, 55, 160, 0.06);
+}
+
+/* Form focus animation */
+.ai-planner-field input,
+.ai-planner-field select,
+.ai-planner-field textarea {
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+/* Reset button */
+.ai-planner-reset-button {
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.ai-planner-reset-button:hover {
+  transform: translateY(-2px);
+}
+
+/* Respect accessibility preferences */
+@media (prefers-reduced-motion: reduce) {
+  .ai-planner-container,
+  .ai-planner-heading,
+  .ai-planner-results {
+    animation: none;
+  }
+
+  .ai-planner-card,
+  .ai-planner-button,
+  .ai-planner-task,
+  .ai-planner-reset-button,
+  .ai-planner-budget-row {
+    transition: none;
+  }
+}
+
+
+
