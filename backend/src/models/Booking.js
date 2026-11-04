@@ -30,6 +30,7 @@ const bookingSchema = new mongoose.Schema(
       default: "",
     },
 
+
     advancePercent: {
       type: Number,
       enum: [25, 50, 75, 100],
